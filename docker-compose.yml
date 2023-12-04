@@ -1,0 +1,28 @@
+version: '3.0'
+services:
+  postgres:
+    image: postgres
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: example_db
+      POSTGRES_USER: userdb
+      POSTGRES_PASSWORD: passworddb
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $$POSTGRES_USER" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    container_name: app
+    ports:
+      - "8080:8080"
+    image: anshemonaev/fsi:latest
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/example_db
+      SPRING_DATASOURCE_USERNAME: userdb
+      SPRING_DATASOURCE_PASSWORD: passworddb
+    depends_on:
+      - postgres
