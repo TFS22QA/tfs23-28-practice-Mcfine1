@@ -1,0 +1,54 @@
+Успешное добавление человека
+Предусловие:
+    Тело JSON
+        {
+          "fio": "Ivan Ivanovich Ivanov",
+          "phone": "+77777777777",
+          "passportSeries": 3322,
+          "passportNumber": 33333333
+        }
+Шаги:
+    1. Сделать POST запрос на http://localhost:8080/api/add с указанным телом
+Ожидаемый результат:
+    Код 200
+
+Успешное обновление информации о человеке
+Предусловие:
+    Тело JSON
+        {
+          "id": 0,
+          "fio": "Petr Petrovich Petrov",
+          "phone": "+75555555555",
+          "passportSeries": 4433,
+          "passportNumber": 44444444
+        }
+Шаги:
+    1. Сделать POST запрос на http://localhost:8080/api/update с указанным телом
+Ожидаемый результат:
+    Код 200
+
+Успешный поиск человека по Id
+Предусловие:
+    1. Создать человека
+    {
+      "id": 0,
+      "fio": "string",
+      "phone": "string",
+      "passportSeries": 0,
+      "passportNumber": 0
+    }
+Шаги:
+    1. Сделать GET запрос на http://localhost:8080/api/get/1
+Ожидаемый результат:
+    Код 200
+    {
+      "id": 1,
+      "fio": "string",
+      "phone": "string",
+      "passportSeries": 0,
+      "passportNumber": 0
+    }
+
+
+
+
