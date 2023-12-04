@@ -1,5 +1,6 @@
 package testApi;
 
+import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,4 +36,40 @@ public class TestApi {
                 .statusCode(HttpStatus.SC_OK);
     }
 
+    @Test
+    public void updateUser(){
+        user.setId(2);
+
+        given()
+                .contentType(ContentType.JSON)
+                .when()
+                .body(user)
+                .baseUri(BASE_URI+"add/")
+                .post()
+                .then()
+                .statusCode(HttpStatus.SC_OK);
+
+        user.setPhone("12345");
+
+        given()
+                .contentType(ContentType.JSON)
+                .when()
+                .body(user)
+                .baseUri(BASE_URI+"update/")
+                .post()
+                .then()
+                .statusCode(HttpStatus.SC_OK);
+
+    }
+
+
+    @Test
+    public void deleteUser(){
+        RestAssured.given()
+                .contentType(ContentType.JSON)
+                .baseUri(BASE_URI+"delete/" + 1)
+                .delete()
+                .then()
+                .statusCode(200);
+    }
 }
